@@ -1,3 +1,25 @@
+=========================
+Gamepad support version
+=========================
+Forked from nanoflite's gamepad support patch version, which is for two gamepads.
+
+To test this patch, you need to copy following files to /pgzero/ folder.
+
+- gamepad.py
+- game.py
+- builtin.py
+There are two /pgzero/ folders:
+
+- for mu-editor  /Applications/mu-editor.app/Contents/Resources/app_packages/pgzero/
+- for Python3    /usr/local/lib/python3.6/site-packages/pgzero/
+
+How to test
+===========
+
+Go into /examples/basic/
+
+``$ pgzrun gamepad_demo.py``
+
 Pygame Zero
 ===========
 
