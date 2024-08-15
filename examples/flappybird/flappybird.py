@@ -1,5 +1,15 @@
-import pgzrun
+import os
 import random
+import pygame
+pygame.init()
+info = pygame.display.Info()
+window_x = int(info.current_w * 0.4)
+window_y = int(info.current_h * 0.1)
+os.environ['SDL_VIDEO_WINDOW_POS'] = f"{window_x},{window_y}"
+# importing pgzrun must be done after setting window position
+import pgzrun
+from storage import Storage
+from pgzero.actor import Actor # to avoid undefined warning
 
 
 TITLE = 'Flappy Bird'
@@ -9,7 +19,7 @@ HEIGHT = 708
 # These constants control the difficulty of the game
 GAP = 130
 GRAVITY = 0.3
-FLAP_STRENGTH = 6.5
+FLAP_STRENGTH = 5.5
 SPEED = 3
 
 bird = Actor('bird1', (75, 200))
@@ -17,8 +27,27 @@ bird.dead = False
 bird.score = 0
 bird.vy = 0
 
-storage.setdefault('highscore', 0)
+# storage.setdefault('highscore', 0)
+# storage = {'highscore': 0}
 
+storage = Storage('flappybird')
+# storage = Storage()
+try:
+    storage.load()
+except FileNotFoundError:
+    print("No save file found.")
+    storage.setdefault('highscore', 0)
+    storage.save()
+except KeyError:
+    print("No highscore found.")
+    storage.setdefault('highscore', 0)
+finally:
+    storage.setdefault('highscore', 0)
+    print("Highscore:", storage['highscore'])
+
+
+# print("Highscore:", storage['highscore'])
+print("Highscore:", storage)
 
 def reset_pipes():
     pipe_gap_y = random.randint(200, HEIGHT - 200)
@@ -40,7 +69,8 @@ def update_pipes():
             bird.score += 1
             if bird.score > storage['highscore']:
                 storage['highscore'] = bird.score
-
+                storage.save()
+                print("Highscore:", storage['highscore'])
 
 def update_bird():
     uy = bird.vy
