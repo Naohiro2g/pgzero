@@ -19,7 +19,7 @@ HEIGHT = 708
 # These constants control the difficulty of the game
 GAP = 130
 GRAVITY = 0.3
-FLAP_STRENGTH = 5.5
+FLAP_STRENGTH = 5.9
 SPEED = 3
 
 bird = Actor('bird1', (75, 200))
