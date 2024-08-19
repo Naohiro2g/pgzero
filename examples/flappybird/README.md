@@ -26,8 +26,11 @@ https://pypi.org/project/pgzero/#history
 ### How could it be fixed?
 
 A. Use simpler way to save the highscore using the dictionary instead of the storage module.
+
 B. Ignore the highscore feature and remove some lines from the code.
+
 C. Put the ```storage.py``` in the same directory of ```flappybird.py``` and fix the code to use it.
+
 D. Fix the codes and upload the new version of pgzero package to Pypi.org.
 
 Plan A is simple and the easiest to do. Only one line of the code is needed to be changed like this:
